@@ -7,7 +7,8 @@ const uri = process.env.MONGODB_URI
 mongoose.connect(uri, {
     /**con esto mongodb se coencta */
     useNewUrlParser: true,
-    useCreateIndex:true
+    useCreateIndex:true,
+    useFindAndModify: false
 });
 
 const conection = mongoose.connection;
