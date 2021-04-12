@@ -3,3 +3,7 @@ body{
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
 }
+
+.navHeader{
+    padding: 20px;
+}

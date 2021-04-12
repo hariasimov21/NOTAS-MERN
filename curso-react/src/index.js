@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
-import bottonInicio from './components/botonIniciar.js';
-import ShoppingList from './components/login.js';
+
+//import App from './components/App.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import App from './App';
 
 ReactDOM.render(<App/>, document.getElementById('app'));
-ReactDOM.render(<ShoppingList/>, document.getElementById('shoppinglist'));
-ReactDOM.render(<bottonInicio/>, document.getElementById('botones'));
