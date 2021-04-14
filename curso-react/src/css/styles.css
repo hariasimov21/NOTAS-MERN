@@ -1,15 +1,23 @@
-body{
-    background-color: #333333;
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
+body {
+  background-color: #333333;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
 }
-.navbar{
-    padding: 0 100px;
+.navbar {
+  padding: 0 100px;
 }
-.navHeader{
-    padding: 20px 0;
+.navHeader {
+  padding: 20px 0;
 }
 
-.nav-link{
-    color: #ffffff;
+.nav-link {
+  color: #ffffff;
+}
+
+.container {
+  margin: 20px;
+}
+
+.btn {
+  margin: 10px 0;
 }

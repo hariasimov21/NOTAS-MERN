@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Button } from 'react-bootstrap';
+import "../css/styles.css";
 
 export default class CreateUser extends Component {
   state = {
@@ -8,6 +10,10 @@ export default class CreateUser extends Component {
   };
 
   async componentDidMount() {
+   this.getUsers();
+  }
+
+  getUsers = async () => {
     const res = await axios.get("http://localhost:3000/api/users");
     this.setState({ users: res.data });
   }
@@ -18,20 +24,39 @@ export default class CreateUser extends Component {
     });
   };
 
+  onSubmit = async e => {
+    e.preventDefault();
+    await axios.post('http://localhost:3000/api/users', {
+      username: this.state.username
+    });
+    this.setState({username : ''})
+    this.getUsers();
+  }
+
+  deleteUser = async(id) =>{
+    await axios.delete(`http://localhost:3000/api/users/${id}`)
+    this.getUsers();
+  }
+
   render() {
     return (
-      <div className="row">
+      <div className="container">
+      <div className="row"> 
         <div className="col-md-4">
           <div className="card card-body">
             <h4>Create New User :3</h4>
-            <form>
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <input
+                value={this.state.username}
                   type="text"
                   className="form-control"
                   onChange={this.onChangeUsername}
                 />
               </div>
+              <Button type="submit" variant="primary" size="lg">
+                Crear usuario
+              </Button>
             </form>
           </div>
         </div>
@@ -39,14 +64,18 @@ export default class CreateUser extends Component {
           <ul className="list-group">
             {this.state.users.map((user) => (
               <li
-                className="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"
                 key={user._id}
               >
                 {user.username}
+
+                <Button type="submit" className="btn btn-primary userName" size="sm" onClick={this.deleteUser}> eliminar usuario</Button>
               </li>
             ))}
           </ul>
         </div>
+      </div>
+
       </div>
     );
   }
