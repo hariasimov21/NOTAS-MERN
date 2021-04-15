@@ -1,8 +1,12 @@
+/* general */
+
 body {
-  background-color: #333333;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
 }
+
+/*navigation*/
+
 .navbar {
   padding: 0 100px;
 }
@@ -14,10 +18,21 @@ body {
   color: #ffffff;
 }
 
+/*create user*/
+
 .container {
   margin: 20px;
 }
 
 .btn {
   margin: 10px 0;
+}
+
+/*create Note*/
+.notas{
+  padding: 20px 0;
+}
+
+.form-group{
+  padding: 5px 0;
 }
