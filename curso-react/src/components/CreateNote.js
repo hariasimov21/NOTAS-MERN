@@ -80,14 +80,14 @@ export default class CreateNote extends Component {
               </textarea>
           </div>
 
-          <div className="form-group">
+         {/*  <div className="form-group">
               <DatePicker className="form-control"
               selected={this.state.date}
               onChange={this.onDateChange}
               dateFormat="dd/MM/yyyy"
               locale="es"
               />
-          </div>
+          </div> */}
 
           <form onSubmit={this.onSubmit}>
             <Button type="submit" variant="primary" size="lg">
