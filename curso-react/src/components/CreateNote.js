@@ -4,10 +4,9 @@ import DatePicker from "react-datepicker";
 import { Button } from "react-bootstrap";
 import "../css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
-import es from 'date-fns/locale/es';
-registerLocale('es', es);
-
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import es from "date-fns/locale/es";
+registerLocale("es", es);
 
 export default class CreateNote extends Component {
   state = {
@@ -15,33 +14,38 @@ export default class CreateNote extends Component {
     userSelected: "",
     title: "",
     content: "",
-    date: new Date()
+    date: new Date(),
   };
 
   async componentDidMount() {
-    this.getUsers();
+    const res = await axios.get("http://localhost:3000/api/users");
+    this.setState({
+      users: res.data.map((user) => user.username),
+      userSelected: res.data[0].username,
+    });
   }
 
-  getUsers = async () => {
-    const res = await axios.get("http://localhost:3000/api/users");
-    this.setState({ users: res.data.map((user) => user.username) });
-  };
-
-  onSubmit = (e) => {
-    e.prevenDefault();
+  onSubmit = async (e) => {
+    e.preventDefault();
+    const newNote = {
+      title: this.state.title,
+      content: this.state.content,
+      date: this.state.date,
+      author: this.state.userSelected,
+    };
+    await axios.post("http://localhost:3000/api/notes", newNote);
+    window.location.href = "/";
   };
 
   onInputChange = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-   onDateChange = (date) => {
-   this.setState({date})
+  onDateChange = (date) => {
+    this.setState({ date });
   };
-
-
 
   render() {
     return (
@@ -63,30 +67,34 @@ export default class CreateNote extends Component {
           </div>
 
           <div className="form-group">
-              <input type="text" 
+            <input
+              type="text"
               className="form-control"
-               placeholder="title" 
-               name="title"
-               onChange={this.onInputChange}
-               required/>
-          </div>
-
-          <div className="form-group">
-              <textarea className="form-control" 
-              placeholder="Content"
+              placeholder="title"
+              name="title"
               onChange={this.onInputChange}
-              required >
-
-              </textarea>
+              required
+            />
           </div>
 
           <div className="form-group">
-              <DatePicker className="form-control"
+            <textarea
+              className="form-control"
+              placeholder="content"
+              name="content"
+              onChange={this.onInputChange}
+              required
+            ></textarea>
+          </div>
+
+          <div className="form-group">
+            <DatePicker
+              className="form-control"
               selected={this.state.date}
               onChange={this.onDateChange}
               dateFormat="dd/MM/yyyy"
               locale="es"
-              />
+            />
           </div>
 
           <form onSubmit={this.onSubmit}>

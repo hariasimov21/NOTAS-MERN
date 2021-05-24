@@ -1,7 +1,7 @@
 /* general */
 
 body {
-  color: #ffffff;
+  color: #333333;
   font-family: "Roboto", sans-serif;
 }
 
@@ -36,4 +36,9 @@ body {
 .form-group{
   
   padding: 5px 0;
+}
+
+/* note list*/
+.card-blue {
+  background-color: #8EC2FA;
 }
