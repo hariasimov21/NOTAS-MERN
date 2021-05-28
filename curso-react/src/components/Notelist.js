@@ -3,6 +3,7 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { Button } from "react-bootstrap";
 import "../css/styles.css";
+import { Link } from "react-router-dom";
 
 export default class Notelist extends Component {
   state = {
@@ -39,7 +40,7 @@ export default class Notelist extends Component {
                 </p>
                 <p>{format(note.date)}</p>
               </div>
-              <div className="card-footer">
+              <div className="card-footer d-flex justify-content-between">
                 <Button
                   type="submit"
                   className="btn btn-primary userName"
@@ -48,6 +49,9 @@ export default class Notelist extends Component {
                 >
                   eliminar nota
                 </Button>
+                <Link className="btn btn-secondary" to={"/edit/" + note._id}>
+                  editar
+                </Link>
               </div>
             </div>
           </div>
