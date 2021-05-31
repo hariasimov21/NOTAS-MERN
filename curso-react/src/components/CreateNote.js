@@ -20,14 +20,17 @@ export default class CreateNote extends Component {
   };
 
   async componentDidMount() {
-    const res = await axios.get("http://localhost:3000/api/users");
+    const res = await axios.get(
+      "https://james-tarea-note.herokuapp.com/api/users"
+    );
     this.setState({
       users: res.data.map((user) => user.username),
       userSelected: res.data[0].username,
     });
     if (this.props.match.params.id) {
       const res = await axios.get(
-        "http://localhost:3000/api/notes/" + this.props.match.params.id
+        "https://james-tarea-note.herokuapp.com/api/notes/" +
+          this.props.match.params.id
       );
       this.setState({
         title: res.data.title,
@@ -50,11 +53,14 @@ export default class CreateNote extends Component {
     };
     if (this.state.editing) {
       await axios.put(
-        "http://localhost:3000/api/notes/" + this.state._id,
+        "https://james-tarea-note.herokuapp.com/api/notes/" + this.state._id,
         newNote
       );
     } else {
-      await axios.post("http://localhost:3000/api/notes", newNote);
+      await axios.post(
+        "https://james-tarea-note.herokuapp.com/api/notes",
+        newNote
+      );
     }
     window.location.href = "/";
   };
